@@ -4,6 +4,8 @@ it's not like i wanted to authenticate you or anything!! ugh
 
 a fork of [pam-u2f](https://github.com/Yubico/pam-u2f) that replaces the cue prompt with randomized tsundere messages
 
+![tsundere][tsundere.png]
+
 ## usage
 
 build and install as you would pam-u2f, then in your PAM config:

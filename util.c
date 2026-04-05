@@ -1185,7 +1185,7 @@ static const char *snark(void) {
         "i-it's not like i missed you. touch the yubikey.",
     };
     static const int len = sizeof(messages) / sizeof(messages[0]);
-    srand(time(NULL));
+    srand((unsigned int)time(NULL));
     return messages[rand() % len];
 }
 
