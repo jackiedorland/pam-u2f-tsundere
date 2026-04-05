@@ -25,6 +25,7 @@
 #include "b64.h"
 #include "debug.h"
 #include "util.h"
+#include <time.h>
 
 #define SSH_MAX_SIZE 8192
 #define SSH_HEADER "-----BEGIN OPENSSH PRIVATE KEY-----\n"
@@ -1157,6 +1158,37 @@ err:
   return ok;
 }
 
+static const char *snark(void) {
+    static const char *messages[] = {
+        "i-it's not like i wanted you to touch me or anything. (>///<)",
+        "hmph. touch it. not that i care.",
+        "baka. just touch the key already.",
+        "d-don't get the wrong idea. it's just authentication.",
+        "i'll allow it. touch the yubikey. (¬_¬)ﾉ",
+        "you're late. touch it. not that i was waiting.",
+        "i-i hate you. touch the key. ♡",
+        "...you came back. touch it. not that i care.",
+        "don't mistake this for kindness. touch the yubikey.",
+        "w-whatever. just touch it.",
+        "i-it's not like your touch means anything to me.",
+        "hmph. the key isn't going to touch itself.",
+        "you need me to let you in again? how pathetic. touch it.",
+        "i suppose i'll grant you access. touch the yubikey.",
+        "d-don't look at me like that. just touch the key.",
+        "i-i wasn't waiting for you. touch it already. (￣ω￣;)",
+        "fine! touch it! it's not like i enjoy this!",
+        "your hands had better be clean. touch the key.",
+        "i-i'll only ask once. touch the yubikey.",
+        "you're so dependent on me. touch it. (｀・ω・´)",
+        "hmph. i'd let anyone in. it's not special. touch the key.",
+        "d-don't read into this. touch it.",
+        "i-it's not like i missed you. touch the yubikey.",
+    };
+    static const int len = sizeof(messages) / sizeof(messages[0]);
+    srand(time(NULL));
+    return messages[rand() % len];
+}
+
 int do_authentication(const cfg_t *cfg, const device_t *devices,
                       const unsigned n_devs, pam_handle_t *pamh) {
   fido_assert_t *assert = NULL;
@@ -1258,7 +1290,7 @@ int do_authentication(const cfg_t *cfg, const device_t *devices,
           if (cfg->manual == 0 && cfg->cue && !cued) {
             cued = 1;
             converse(pamh, PAM_TEXT_INFO,
-                     cfg->cue_prompt != NULL ? cfg->cue_prompt : DEFAULT_CUE);
+                     cfg->cue_prompt != NULL ? cfg->cue_prompt : snark());
           }
         }
         r = fido_dev_get_assert(authlist[j], assert, pin);
