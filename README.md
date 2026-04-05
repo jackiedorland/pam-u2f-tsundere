@@ -1,6 +1,6 @@
 # pam-u2f-tsundere
 
-it's not like i wanted to authenticate you or anything!!
+it's not like i wanted to authenticate you or anything!! ugh
 
 a fork of [pam-u2f](https://github.com/Yubico/pam-u2f) that replaces the cue prompt with randomized tsundere messages
 
